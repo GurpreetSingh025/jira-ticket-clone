@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jira Ticket Clone</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+     <!-- cont means container -->
+
+     <div class="toolbar-cont" >
+
+        <div class="action-btn-cont" style="width : 5rem;" id="allColorFilter">
+            <div class="allColorBtn" style="display: flex; flex-wrap : nowrap; justify-content : center; text-align: center; padding-left: 2%; color : #fff; font-size: 14px;  ">
+                Show All Tickets
+            </div>
+        </div>
+
+         <div class="toolbar-priority-cont">
+             <div class="lightgreen color"></div>
+             <div class="lightblue color"></div>
+             <div class="lightpink color"></div>
+             <div class="black color"></div>
+         </div>
+
+         <div class="action-btn-cont">
+             <div class="add-btn">
+                <i class="fas fa-plus"></i>
+             </div>
+
+             <!-- <div class="remove-btn">
+                <i class="fas fa-times"></i>
+             </div> -->
+         </div>
+
+     </div>
+      
+     <div class="main-cont">
+
+        <!-- /<div class="ticket-cont" colorOfTicket="lightpink"> -->
+        <div class="ticket-cont" colorOfTicket=""> 
+            <div class="ticket-color"></div>
+            <div class="ticket-id"> Random Id</div>
+            <div class="task-area" spellcheck="false">
+                Random Text
+            </div>
+            <div class ="ticket-lock" style="display: flex; justify-content : space-evenly;"> 
+                <!-- <i class="fa-solid fa-lock"></i> -->
+                <!-- <i class="fas fa-trash"></i> -->
+                <span style="font-weight : bold ; color: #dd7d00; " >This Is Demo Ticket</span>
+            </div>
+        </div>
+<!-- 
+
+
+         <div class="ticket-cont">
+            <div class="ticket-color"></div>
+            <div class="ticket-id">#$aw123a</div>
+            <div class="task-area">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur nesciunt eius deserunt sapiente alias cum ab corporis culpa, ut non eligendi ex id est at magnam molestias autem consequatur delectus nam repellendus, repudiandae atque maxime sequi expedita! Libero? 
+            </div>
+        </div>
+
+        <div class="ticket-cont">
+            <div class="ticket-color"></div>
+            <div class="ticket-id">#$aw123a</div>
+            <div class="task-area">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur nesciunt eius deserunt sapiente alias cum ab corporis culpa, ut non eligendi ex id est at magnam molestias autem consequatur delectus nam repellendus, repudiandae atque maxime sequi expedita! Libero? 
+            </div>
+        </div>
+
+        <div class="ticket-cont">
+            <div class="ticket-color"></div>
+            <div class="ticket-id">#$aw123a</div>
+            <div class="task-area">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur nesciunt eius deserunt sapiente alias cum ab corporis culpa, ut non eligendi ex id est at magnam molestias autem consequatur delectus nam repellendus, repudiandae atque maxime sequi expedita! Libero? 
+            </div>
+        </div>
+
+        <div class="ticket-cont">
+            <div class="ticket-color"></div>
+            <div class="ticket-id">#$aw123a</div>
+            <div class="task-area">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur nesciunt eius deserunt sapiente alias cum ab corporis culpa, ut non eligendi ex id est at magnam molestias autem consequatur delectus nam repellendus, repudiandae atque maxime sequi expedita! Libero? 
+            </div>
+        </div>
+
+        <div class="ticket-cont">
+            <div class="ticket-color"></div>
+            <div class="ticket-id">#$aw123a</div>
+            <div class="task-area">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur nesciunt eius deserunt sapiente alias cum ab corporis culpa, ut non eligendi ex id est at magnam molestias autem consequatur delectus nam repellendus, repudiandae atque maxime sequi expedita! Libero? 
+            </div>
+        </div>
+
+        <div class="ticket-cont">
+            <div class="ticket-color"></div>
+            <div class="ticket-id">#$aw123a</div>
+            <div class="task-area">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur nesciunt eius deserunt sapiente alias cum ab corporis culpa, ut non eligendi ex id est at magnam molestias autem consequatur delectus nam repellendus, repudiandae atque maxime sequi expedita! Libero? 
+            </div>
+        </div>
+
+        <div class="ticket-cont">
+            <div class="ticket-color"></div>
+            <div class="ticket-id">#$aw123a</div>
+            <div class="task-area">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur nesciunt eius deserunt sapiente alias cum ab corporis culpa, ut non eligendi ex id est at magnam molestias autem consequatur delectus nam repellendus, repudiandae atque maxime sequi expedita! Libero? 
+            </div>
+        </div>
+
+        <div class="ticket-cont">
+            <div class="ticket-color"></div>
+            <div class="ticket-id">#$aw123a</div>
+            <div class="task-area">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur nesciunt eius deserunt sapiente alias cum ab corporis culpa, ut non eligendi ex id est at magnam molestias autem consequatur delectus nam repellendus, repudiandae atque maxime sequi expedita! Libero? 
+            </div>
+        </div> -->
+
+     </div>
+
+     <div class="modal-cont"> 
+         <textarea class="textarea-cont" placeholder="Type Your Text and then press ctrl to create Ticket" spellcheck="false"></textarea>
+         <div class="priority-color-cont">
+             <div class="lightgreen priority-color" id="c1"></div>
+             <div class="lightblue priority-color" id="c2"></div>
+             <div class="lightpink priority-color" id="c3"></div>
+             <div class="black priority-color" id="c4"></div>
+         </div>
+     </div>
+</body>
+
+<!-- ya ek library ko link kiya h jiss sa id generate kr skta h . shortid() 
+method sa id generate hogi -->
+
+<script src="https://unpkg.com/shortid-dist@1.0.5/dist/shortid-2.2.13.min.js"></script>
+<script src="script.js"></script>
+</html>
