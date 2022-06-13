@@ -1,3 +1,27 @@
+if (localStorage.length > 0){
+    let arr = JSON.parse(localStorage.getItem("tickets"));
+    for(let i=0; i<arr.length ; i++){
+        let ticket_color = arr[i].ticketColor ;
+        let ticketId = arr[i].ticketId;
+        let ticketContent = arr[i].contentOfTicket;
+        let mainContElem = document.querySelector(".main-cont");
+
+        let newElem = document.createElement("div");      
+        newElem.setAttribute("class" , "ticket-cont");
+        newElem.innerHTML = `
+               <div class="ticket-color ${ticket_color}" ></div>
+               <div class="ticket-id" id="id1">${ticketId}</div>
+               <div class="task-area" spellcheck="false"> ${ticketContent} </div>             
+               <div class ="ticket-lock">                      
+                  <i class="fas fa-trash"></i>      
+                  <i class="fa-solid fa-lock"></i>
+               </div>        
+           `;
+   
+        newElem.setAttribute("colorOfTicket" , ticket_color);     
+        mainContElem.appendChild(newElem);        
+    }
+}  
 
 let addBtn = document.querySelector(".add-btn");
 let modal = document.querySelector(".modal-cont");
@@ -6,6 +30,10 @@ let modalDisplaying = false;
 let textareaElem = document.querySelector(".textarea-cont");
 let mainContElem = document.querySelector(".main-cont");
 let priorityColorElem = document.querySelectorAll(".priority-color");
+
+let allTicket = document.querySelectorAll(".ticket-cont");
+
+let ticektArr = [] ;
 
 // show modal whenever clicked on + button
 addBtn.addEventListener("click" , (e) => {
@@ -41,11 +69,12 @@ textareaElem.addEventListener("keydown" , (e) => {
 function addTicket(ticketColor , ticketId){    
          
      let newElem = document.createElement("div");
+     let contentOfTicket = textareaElem.value;
      newElem.setAttribute("class" , "ticket-cont");
      newElem.innerHTML = `
             <div class="ticket-color ${ticketColor}" ></div>
             <div class="ticket-id" id="id1">${ticketId}</div>
-            <div class="task-area" spellcheck="false"> ${textareaElem.value} </div>             
+            <div class="task-area" spellcheck="false"> ${contentOfTicket} </div>             
             <div class ="ticket-lock">                      
                <i class="fas fa-trash"></i>      
                <i class="fa-solid fa-lock"></i>
@@ -54,9 +83,15 @@ function addTicket(ticketColor , ticketId){
 
      newElem.setAttribute("colorOfTicket" , ticketColor);     
      mainContElem.appendChild(newElem);             
+   
+     handleLock(newElem);      
 
-     handleLock(newElem);
-     removeTicket(newElem);    
+     ticektArr.push({ticketColor ,ticketId , contentOfTicket});
+     ticektArr.forEach((e) => {console.log(e);})  
+     
+     localStorage.setItem("tickets" , JSON.stringify(ticektArr));   
+     
+     removeTicket(newElem);
 }
 
 /*Lock Of Ticket will unlock if it is locked and it will be locked if it is unlocked*/ 
@@ -64,25 +99,34 @@ function addTicket(ticketColor , ticketId){
 function handleLock(ticket){
     let ticketLock = ticket.querySelector(".ticket-lock");
     let ticketLockIcon = ticketLock.children[1];
-    let ticketTaskArea = ticket.querySelector(".task-area");
-
+    let ticketTaskArea = ticket.querySelector(".task-area");    
+    
     ticketLockIcon.addEventListener("click" , (e) => {
             if(ticketLockIcon.classList.contains("fa-lock")){
               ticketLockIcon.classList.remove("fa-lock");
               ticketLockIcon.classList.add("fa-lock-open");
             
-            // apn chahcta h ki jbb lock open ho to content edit ho skta aur
-            //jb lock close ho toh content edit nhi ho ska
-            //contenteditable naam ka ek attribute h , jiski 2 values h 
-            //true or false , true hua toh content edit ho skta h otherwise
-            //nhi ho skta.
-
             ticketTaskArea.setAttribute("contenteditable" , "true");
         }else{
              ticketLockIcon.classList.remove("fa-lock-open");
              ticketLockIcon.classList.add("fa-lock");
              ticketTaskArea.setAttribute("contenteditable" , "false");
         }
+        
+        let ticket_id = ticket.querySelector("#id1");         
+        console.log(ticket_id.innerText);
+        
+        ticektArr.forEach((eachTicket) => {
+               let eachTicketId = eachTicket.ticketId;
+               let eachTicketTaskArea = eachTicket.contentOfTicket;
+               console.log("eachTicket is "+eachTicket.ticketId);
+               console.log("asdd  "+eachTicketId);
+               if(eachTicketId == ticket_id.innerText ){
+                   eachTicket.contentOfTicket = ticketTaskArea.innerText;
+                //    console.log(eachTicket.contentOfTicket);
+                //    console.log(eachTicket);
+               }
+        });
     })
 }
 
@@ -98,22 +142,6 @@ function removeTicket(ticket){
 }
 
 
-// jbb bhi priority color pr click hoga inside modal , tbb 
-//ek border bnn jayega priority color k around , jiss se
-//ye pata chl jayega ki konsa priority color clicked hua pda h
-
-
-// priorityColorElem.forEach((priorityColor) => {
-    
-//     priorityColor.addEventListener("click" , (e) => {
-//           priorityColorElem.forEach((color) => {
-//                 color.style.border = "none";
-//           });   
-          
-//           priorityColor.style.border = "6px solid #fff";
-//     });
-// });
-
 let elem ;
 let lightgreen = document.getElementById("c1");
 let lightblue = document.getElementById("c2");
@@ -121,11 +149,6 @@ let lightpink = document.getElementById("c3");
 let black = document.getElementById("c4");
 let color;
 
-// Apn javascript k document k jariya unn id classes ko select nhi kr skta 
-//jinko javascript sa hi bnaya h , html sa nhi bnaya ... for example 
-//addTicket function ma ticket-color aur ticket-id javascript sa bnaya h
-//html sa nhi toh jbb mana  ticketId = document.getElementById("id1")  likha
-//tbb bhi ticketId ma null hi rhega.
 
 // let ticketId = document.getElementById("id1");
 
@@ -133,10 +156,7 @@ function removeBorder(elem){
     elem.style.border = "none";
 }
 
-//elem naam ka variable liya aur ab agr elem ma lightgreen h iska mtlb 
-//lightgreen naam ka border selected h , agr asa h toh jbb bhi kisi aur 
-//color pr click hoga toh lightgreen pr sa border htt jayega aur jiss pr
-//click kiya uss pr border add ho jayega
+
 
 lightgreen.addEventListener("click" , (e) => {
      if(elem!=null){
@@ -183,7 +203,7 @@ showAllColorsTickets.addEventListener("click" , (e) => {
     })
 });
 
-//jbb bhi kisi color pr click kraga toh uss color ki tickets visible ho jayegi
+
 let allToolbarColors = document.querySelectorAll(".color");
 
 allToolbarColors.forEach((eachColor) => {
